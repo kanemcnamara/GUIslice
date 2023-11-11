@@ -220,7 +220,7 @@ bool gslc_DrvInit(gslc_tsGui* pGui)
 
     #if (GSLC_SPIFFS_EN)
       // Initialize SPIFFS file system
-      if (!SPIFFS.begin()) {
+      if (!LittleFS.begin()) {
         GSLC_DEBUG_PRINT("ERROR: DrvInit() SPIFFS init failed\n", 0);
       }
     #endif    
@@ -1068,7 +1068,7 @@ bool gslc_DrvDrawJpegFromFile(gslc_tsGui* pGui,int16_t nDstX,int16_t nDstY,gslc_
   // use optimized ESP32 native decoder
   // drawJpgFile() can return false upon a decoding failure (eg. for
   // unsupported progressive JPEG images), so we trap it here.
-  if (!fex.drawJpgFile(SPIFFS, pStrFname, nDstX, nDstY)) {
+  if (!fex.drawJpgFile(LittleFS, pStrFname, nDstX, nDstY)) {
     GSLC_DEBUG_PRINT("ERROR: DrvDrawJpegFromFile() failed on [%s]",pStrFname);
     return false;
   }
